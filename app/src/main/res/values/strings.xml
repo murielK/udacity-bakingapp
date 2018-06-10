@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Mariam\'s Food</string>
+    <string name="error_msg_not_connected">Sorry, internet connection is required.</string>
+    <string name="error_msg_something_went_wrong">Something went wrong.</string>
+    <string name="title_recipes">Recipes</string>
+    <string name="placeholder_serving">%d person(s)</string>
+    <string name="text_ingredients">Ingredients</string>
+    <string name="text_steps">Steps</string>
+    <string name="error_msg_unable_to_load_recipe">Unable to load recipe</string>
+    <string name="placeholder_ingredient">%s%s %s</string>
+    <string name="placeholder_step">Step %d</string>
+    <string name="text_next">Next</string>
+    <string name="text_prev">Prev</string>
+    <string name="error_msg_recipe_not_int_favorite">No favorite recipe found</string>
+    <string name="title_my_favorite_recipe">My favorite recipe</string>
+    <string name="error_msg_unable_to_load_step">Unable to load step</string>
+</resources>

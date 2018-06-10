@@ -1,0 +1,59 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="TextAppearanceLarge" parent="android:TextAppearance.DeviceDefault">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="TextAppearanceMedium" parent="android:TextAppearance.DeviceDefault">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="TextAppearanceMedium2" parent="android:TextAppearance.DeviceDefault">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="TextAppearanceSmall" parent="android:TextAppearance.DeviceDefault">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="TextAppearanceMediumWhite" parent="android:TextAppearance.DeviceDefault">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextAppearanceSmallWhite" parent="android:TextAppearance.DeviceDefault">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextAppearanceLargeWhite" parent="android:TextAppearance.DeviceDefault">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="LauncherTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/img_splash_screen</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="TextAppearanceTableLayout" parent="android:TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+</resources>

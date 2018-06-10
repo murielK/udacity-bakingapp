@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="image_recipe_height" tools:ignore="MissingDefaultResource">200dp</dimen>
+    <dimen name="text_size_large">19sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+
+    <dimen name="recycler_view_spacing">8dp</dimen>
+    <dimen name="app_bar_height">300dp</dimen>
+</resources>

@@ -1,0 +1,42 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="hr.murielkamgang.mf">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".components.MariamsApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".components.launcher.LauncherActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/LauncherTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".components.Recipe.RecipeActivity" />
+        <activity android:name=".components.detail.RecipeDetailActivity" />
+        <activity android:name=".components.detail.stepdetail.StepDetailActivity" />
+
+        <receiver
+            android:name=".components.detail.widget.IngredientsWidgetProvider"
+            android:label="@string/title_my_favorite_recipe">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ingredient_widget_provider" />
+        </receiver>
+        <service
+            android:name=".components.detail.widget.IngredientWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+    </application>
+</manifest>
