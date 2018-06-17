@@ -18,14 +18,18 @@ public class RecipeDetailPresenter implements RecipeDetailContract.Presenter {
     private RecipeDetailContract.View view;
 
     @Inject
-    public RecipeDetailPresenter(Repository<Recipe, BaseKVH> recipeRepository, int recipeId) {
+    RecipeDetailPresenter(Repository<Recipe, BaseKVH> recipeRepository, int recipeId) {
         this.recipeRepository = recipeRepository;
         this.recipeId = recipeId;
     }
 
     @Override
     public void delegateStepClicked(Recipe recipe, Step step) {
-        view.openStepActivityDetailFor(recipe, step);//todo for now
+        if (view.getContext().getResources().getBoolean(R.bool.tablet_mode)) {
+            view.showFragmentDetailFor(recipe, step);
+        } else {
+            view.openStepActivityDetailFor(recipe, step);//todo for now
+        }
     }
 
     @Override

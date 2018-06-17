@@ -21,8 +21,6 @@ public class StepDetailsPresenter implements StepDetailContract.Presenter {
 
     private int stepId;
     private Disposable disposable;
-    private Recipe recipe;
-    private Step step;
     private StepDetailContract.View view;
 
     @Inject
@@ -49,28 +47,25 @@ public class StepDetailsPresenter implements StepDetailContract.Presenter {
         disposable = recipeRepository.getLocalDataSource()
                 .getDataAsObservable(new BaseKVH("id", recipeId))
                 .map((Function<Recipe, List<Step>>) recipe -> {
-                    StepDetailsPresenter.this.recipe = recipe;
+                    view.onRecipe(recipe);
                     return recipe.getSteps();
                 })
                 .flatMapIterable((Function<List<Step>, Iterable<Step>>) steps -> steps)
                 .filter(step -> step.getId() == stepId)
                 .firstOrError()
                 .subscribe(step -> {
-                    StepDetailsPresenter.this.step = step;
-                    if (view != null) {
-                        if ((step.getVideoURL() != null && !step.getVideoURL().isEmpty())) {
-                            view.showVideo(step.getVideoURL());
-                        } else if (step.getThumbnailURL() != null && step.getThumbnailURL().endsWith(".mp4")) {
-                            view.showVideo(step.getThumbnailURL());
-                        } else if (step.getThumbnailURL() != null && !step.getThumbnailURL().isEmpty()) {
-                            view.showImage(step.getThumbnailURL());
-                        } else {
-                            view.hideGraphicContent();
-                        }
-
-                        view.onFullDescription(step.getDescription());
-                        view.onStep(view.getContext().getString(R.string.placeholder_step, step.getId() + 1));
+                    if ((step.getVideoURL() != null && !step.getVideoURL().isEmpty())) {
+                        view.showVideo(step.getVideoURL());
+                    } else if (step.getThumbnailURL() != null && step.getThumbnailURL().endsWith(".mp4")) {
+                        view.showVideo(step.getThumbnailURL());
+                    } else if (step.getThumbnailURL() != null && !step.getThumbnailURL().isEmpty()) {
+                        view.showImage(step.getThumbnailURL());
+                    } else {
+                        view.hideGraphicContent();
                     }
+
+                    view.onFullDescription(step.getDescription());
+                    view.onStep(step);
                 }, throwable -> {
                     if (view != null) {
                         view.toast(R.string.error_msg_unable_to_load_step);

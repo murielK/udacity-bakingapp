@@ -38,6 +38,9 @@ public class StepAdapter extends BaseRecyclerViewAdapter<Step, BaseRecyclerViewA
 
         @Override
         protected void performBinding(Step step) {
+            if (textShortDescription.getVisibility() != View.VISIBLE) {
+                textShortDescription.setVisibility(View.VISIBLE);
+            }
             textStep.setText(textStep.getContext().getString(R.string.placeholder_step, step.getId() + 1));
             textShortDescription.setText(step.getShortDescription());
         }

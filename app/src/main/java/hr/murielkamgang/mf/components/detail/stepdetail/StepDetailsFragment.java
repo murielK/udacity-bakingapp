@@ -22,6 +22,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import hr.murielkamgang.mf.R;
 import hr.murielkamgang.mf.components.base.BaseDialogFragment;
+import hr.murielkamgang.mf.data.model.receipe.Recipe;
+import hr.murielkamgang.mf.data.model.receipe.Step;
 
 public class StepDetailsFragment extends BaseDialogFragment<StepDetailContract.View, StepDetailContract.Presenter> implements StepDetailContract.View {
 
@@ -33,6 +35,8 @@ public class StepDetailsFragment extends BaseDialogFragment<StepDetailContract.V
     ImageView imageView;
     @BindView(R.id.textFullDescription)
     TextView textFullDescription;
+    @BindView(R.id.textStep)
+    TextView textStep;
 
     @Inject
     StepDetailContract.Presenter presenter;
@@ -96,9 +100,15 @@ public class StepDetailsFragment extends BaseDialogFragment<StepDetailContract.V
     }
 
     @Override
-    public void onStep(String step) {
+    public void onStep(Step step) {
+        textStep.setText(getString(R.string.placeholder_step, step.getId() + 1));
+    }
+
+    @Override
+    public void onRecipe(Recipe recipe) {
         if (getActivity() instanceof StepDetailActivity) {
-            ((StepDetailActivity) getActivity()).getToolbar().setTitle(step);
+            ((StepDetailActivity) getActivity()).getToolbar().setTitle(recipe.getName());
+            ((StepDetailActivity) getActivity()).getToolbar().setSubtitle(getString(R.string.placeholder_serving, recipe.getServings()));
         }
     }
 

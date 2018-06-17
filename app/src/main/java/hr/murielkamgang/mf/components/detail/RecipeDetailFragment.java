@@ -21,6 +21,7 @@ import butterknife.BindView;
 import hr.murielkamgang.mf.R;
 import hr.murielkamgang.mf.components.base.BaseDialogFragment;
 import hr.murielkamgang.mf.components.detail.stepdetail.StepDetailActivity;
+import hr.murielkamgang.mf.components.detail.stepdetail.StepDetailsFragment;
 import hr.murielkamgang.mf.data.model.receipe.Recipe;
 import hr.murielkamgang.mf.data.model.receipe.Step;
 
@@ -93,6 +94,15 @@ public class RecipeDetailFragment extends BaseDialogFragment<RecipeDetailContrac
 
     @Override
     public void showFragmentDetailFor(Recipe recipe, Step step) {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(StepDetailActivity.EXTRA_STEP_ID_KEY, step.getId());
+        bundle.putInt(RecipeDetailActivity.EXTRA_RECIPE_ID_KEY, recipe.getId());
+        final StepDetailsFragment stepDetailsFragment = new StepDetailsFragment();
+
+        stepDetailsFragment.setArguments(bundle);
+        getChildFragmentManager().beginTransaction()
+                .replace(R.id.containerStep, stepDetailsFragment)
+                .commit();
 
     }
 

@@ -4,6 +4,9 @@ import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 import dagger.android.ContributesAndroidInjector;
+import hr.murielkamgang.mf.components.detail.stepdetail.StepDetailContract;
+import hr.murielkamgang.mf.components.detail.stepdetail.StepDetailsFragment;
+import hr.murielkamgang.mf.components.detail.stepdetail.StepDetailsPresenter;
 import hr.murielkamgang.mf.components.di.ActivityScoped;
 import hr.murielkamgang.mf.components.di.FragmentScoped;
 import hr.murielkamgang.mf.data.model.receipe.Recipe;
@@ -62,5 +65,13 @@ public abstract class RecipeDetailModule {
     @ActivityScoped
     @Binds
     abstract StepContract.Presenter provideStepPresenter(StepPresenter stepPresenter);
+
+    @ActivityScoped
+    @Binds
+    abstract StepDetailContract.Presenter providePresenter(StepDetailsPresenter stepDetailsPresenter);
+
+    @ContributesAndroidInjector
+    @FragmentScoped
+    abstract StepDetailsFragment provideStepDetailFragment();
 
 }

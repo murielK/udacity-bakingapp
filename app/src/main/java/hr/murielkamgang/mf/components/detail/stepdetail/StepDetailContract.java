@@ -4,8 +4,10 @@ import android.os.Bundle;
 
 import hr.murielkamgang.mf.components.base.BaseDialogView;
 import hr.murielkamgang.mf.components.base.BasePresenter;
+import hr.murielkamgang.mf.data.model.receipe.Recipe;
+import hr.murielkamgang.mf.data.model.receipe.Step;
 
-interface StepDetailContract {
+public interface StepDetailContract {
 
     interface View extends BaseDialogView {
 
@@ -17,7 +19,9 @@ interface StepDetailContract {
 
         void onFullDescription(String descriptionUrl);
 
-        void onStep(String step);
+        void onStep(Step step);
+
+        void onRecipe(Recipe recipe);
 
     }
 

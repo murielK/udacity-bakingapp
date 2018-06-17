@@ -20,7 +20,7 @@ public class StepPresenter extends BaseContentListPresenter<Step, StepContract.V
     private Recipe recipe;
 
     @Inject
-    public StepPresenter(Repository<Recipe, BaseKVH> recipeRepository, int recipeId) {
+    StepPresenter(Repository<Recipe, BaseKVH> recipeRepository, int recipeId) {
         this.recipeRepository = recipeRepository;
         this.recipeId = recipeId;
     }

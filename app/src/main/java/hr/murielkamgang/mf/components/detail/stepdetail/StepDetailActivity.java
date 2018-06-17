@@ -49,4 +49,9 @@ public class StepDetailActivity extends BaseToolBarActivity {
     protected Class<? extends AppCompatActivity> provideParentActivityClass() {
         return null;
     }
+
+    @Override
+    protected boolean isDisplayHomeAsUpEnabled() {
+        return true;
+    }
 }
