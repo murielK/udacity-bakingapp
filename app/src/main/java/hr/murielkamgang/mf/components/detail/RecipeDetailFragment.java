@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -27,7 +28,7 @@ import hr.murielkamgang.mf.data.model.receipe.Step;
 
 public class RecipeDetailFragment extends BaseDialogFragment<RecipeDetailContract.View, RecipeDetailContract.Presenter> implements RecipeDetailContract.View {
 
-    @BindView(R.id.viewPage)
+    @BindView(R.id.viewPager)
     ViewPager viewPager;
     @BindView(R.id.tabLayout)
     TabLayout tabLayout;
@@ -111,7 +112,7 @@ public class RecipeDetailFragment extends BaseDialogFragment<RecipeDetailContrac
         final RecipeDetailActivity recipeDetailActivity = (RecipeDetailActivity) getActivity();
         recipeDetailActivity.getSupportActionBar().setTitle(recipe.getName());
         recipeDetailActivity.getSupportActionBar().setSubtitle(getString(R.string.placeholder_serving, recipe.getServings()));
-        if (recipe.getImage() != null && !recipe.getImage().isEmpty()) {
+        if (!TextUtils.isEmpty(recipe.getImage())) {
             picasso.load(recipe.getImage())
                     .fit()
                     .centerCrop()

@@ -58,9 +58,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/viewPage"
-                app:layout_constraintEnd_toEndOf="@+id/viewPage"
-                app:layout_constraintStart_toStartOf="@+id/viewPage"
+                app:layout_constraintBottom_toTopOf="@+id/viewPager"
+                app:layout_constraintEnd_toEndOf="@+id/viewPager"
+                app:layout_constraintStart_toStartOf="@+id/viewPager"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tabGravity="center"
                 app:tabIndicatorHeight="0dp"
@@ -81,7 +81,7 @@
             </android.support.design.widget.TabLayout>
 
             <android.support.v4.view.ViewPager
-                android:id="@+id/viewPage"
+                android:id="@+id/viewPager"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
@@ -101,7 +101,7 @@
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/viewPage"
+                app:layout_constraintStart_toEndOf="@+id/viewPager"
                 app:layout_constraintTop_toBottomOf="@+id/tabLayout">
 
             </FrameLayout>

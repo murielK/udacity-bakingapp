@@ -2,6 +2,7 @@ package hr.murielkamgang.mf.components.detail.stepdetail;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -27,6 +28,9 @@ import hr.murielkamgang.mf.data.model.receipe.Step;
 
 public class StepDetailsFragment extends BaseDialogFragment<StepDetailContract.View, StepDetailContract.Presenter> implements StepDetailContract.View {
 
+    private static final String EXTRA_CURRENT_POSITION_KEY = "EXTRA_CURRENT_POSITION_KEY";
+    private static final String EXTRA_PLAY_WHEN_READY_KEY = "EXTRA_PLAY_WHEN_READY_KEY";
+    private static final String EXTRA_CURRENT_WINDOW_KEY = "EXTRA_CURRENT_WINDOW_KEY";
     @BindView(R.id.frame)
     FrameLayout frameLayout;
     @BindView(R.id.playerView)
@@ -45,6 +49,11 @@ public class StepDetailsFragment extends BaseDialogFragment<StepDetailContract.V
 
     ExoPlayer player;
 
+    private String currentUrl;
+    private boolean playWhenReady = true;
+    private long currentPosition;
+    private int currentWindow;
+
     @Inject
     public StepDetailsFragment() {
     }
@@ -52,10 +61,23 @@ public class StepDetailsFragment extends BaseDialogFragment<StepDetailContract.V
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            currentPosition = savedInstanceState.getLong(EXTRA_CURRENT_POSITION_KEY);
+            playWhenReady = savedInstanceState.getBoolean(EXTRA_PLAY_WHEN_READY_KEY);
+            currentWindow = savedInstanceState.getInt(EXTRA_CURRENT_WINDOW_KEY);
+        }
         if (presenter != null) {
             presenter.setBundle(getArguments());
             presenter.setView(this);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong(EXTRA_CURRENT_POSITION_KEY, currentPosition);
+        outState.putBoolean(EXTRA_PLAY_WHEN_READY_KEY, playWhenReady);
+        outState.putInt(EXTRA_CURRENT_WINDOW_KEY, currentWindow);
     }
 
     @Override
@@ -84,6 +106,7 @@ public class StepDetailsFragment extends BaseDialogFragment<StepDetailContract.V
 
     @Override
     public void showVideo(String videoUrl) {
+        currentUrl = videoUrl;
         playerView.setVisibility(View.VISIBLE);
         player = ExoPlayerFactory.newSimpleInstance(getContext(), new DefaultTrackSelector());
         playerView.setPlayer(player);
@@ -91,7 +114,10 @@ public class StepDetailsFragment extends BaseDialogFragment<StepDetailContract.V
         final MediaSource mediaSource = new ExtractorMediaSource.Factory(
                 new DefaultHttpDataSourceFactory("udacity"))
                 .createMediaSource(Uri.parse(videoUrl));
-        player.prepare(mediaSource, true, true);
+
+        player.setPlayWhenReady(playWhenReady);
+        player.seekTo(currentPosition);
+        player.prepare(mediaSource, false, false);
     }
 
     @Override
@@ -115,25 +141,30 @@ public class StepDetailsFragment extends BaseDialogFragment<StepDetailContract.V
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (player != null) {
-            player.stop();
-            player.release();
-        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (player != null) {
-            player.setPlayWhenReady(true);
+        if (currentUrl != null && player == null) {
+            showVideo(currentUrl);
         }
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        releasePlayer();
+    }
+
+    private void releasePlayer() {
         if (player != null) {
-            player.setPlayWhenReady(false);
+            currentPosition = Math.max(0, player.getCurrentPosition());
+            currentWindow = player.getCurrentWindowIndex();
+            playWhenReady = player.getPlayWhenReady();
+            player.release();
+            player = null;
         }
     }
+
 }
